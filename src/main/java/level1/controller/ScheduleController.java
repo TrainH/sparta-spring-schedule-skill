@@ -6,10 +6,9 @@ import level1.dto.ScheduleResponseDto;
 import level1.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/schedules")
@@ -29,4 +28,16 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleResponseDto);
     }
 
+    @GetMapping
+    public ResponseEntity<List<ScheduleResponseDto>> getAll() {
+        List<ScheduleResponseDto> scheduleResponseDtoList =
+                            scheduleService.getAll();
+        return ResponseEntity.ok(scheduleResponseDtoList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> getById(@PathVariable long id) {
+        ScheduleResponseDto scheduleResponseDto = scheduleService.getById(id);
+        return ResponseEntity.ok(scheduleResponseDto);
+    }
 }
