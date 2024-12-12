@@ -2,9 +2,8 @@ package level2.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 
-@Setter
+
 @Getter
 @Entity
 @Table(name = "schedule")
@@ -22,6 +21,10 @@ public class Schedule extends ScheduleBaseEntity {
     @Column
     private String todoContent;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     public Schedule() {}
 
     public Schedule(String userName, String todoTitle, String todoContent) {
@@ -29,4 +32,17 @@ public class Schedule extends ScheduleBaseEntity {
         this.todoTitle = todoTitle;
         this.todoContent = todoContent;
     }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public void setTodoTitle(String todoTitle) {
+        this.todoTitle = todoTitle;
+    }
+    public void setTodoContent(String todoContent){
+        this.todoContent = todoContent;
+    }
+
+    public void setMember(Member member) {this.member = member;}
+
 }

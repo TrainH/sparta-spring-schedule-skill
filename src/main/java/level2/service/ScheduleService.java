@@ -2,23 +2,34 @@ package level2.service;
 
 
 import level2.dto.ScheduleResponseDto;
+import level2.entity.Member;
 import level2.entity.Schedule;
+import level2.repository.MemberRepository;
 import level2.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
+    private final MemberRepository memberRepository;
 
     public ScheduleResponseDto post(String userName, String todoTitle, String todoContent) {
 
+        // userName으로 DB 조회해서 foudMember을 불러옴
+        Member foundMember = memberRepository.findByUserName(userName)
+                                             .orElseThrow(() ->
+                                                     new ResponseStatusException(HttpStatus.NOT_FOUND, userName + "존재하지 않습니다."));
+
         Schedule schedule = new Schedule(userName, todoTitle, todoContent);
+
+        schedule.setMember(foundMember);
 
         scheduleRepository.save(schedule);
 
