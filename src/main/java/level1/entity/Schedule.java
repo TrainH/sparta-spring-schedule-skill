@@ -2,7 +2,9 @@ package level1.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 @Entity
 @Table(name = "schedule")
@@ -27,5 +29,4 @@ public class Schedule extends BaseEntity {
         this.todoTitle = todoTitle;
         this.todoContent = todoContent;
     }
-
 }

@@ -2,6 +2,7 @@ package level1.service;
 
 
 import level1.dto.ScheduleResponseDto;
+
 import level1.entity.Schedule;
 import level1.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +44,43 @@ public class ScheduleService {
                                  .map(ScheduleResponseDto::toDto)
                                  .orElseThrow(() ->
                                          new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않습니다. id = " + id));
+    }
+
+
+    public void patchById(Long id, String userName, String todoTitle, String todoContent){
+        Schedule foundSchedule = scheduleRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않습니다. id = " + id));
+        System.out.println(userName);
+        System.out.println(todoTitle);
+        System.out.println(todoContent);
+
+        System.out.println(foundSchedule.getUserName());
+        System.out.println(foundSchedule.getTodoTitle());
+        System.out.println(foundSchedule.getTodoContent());
+
+        if (userName != null) {
+            foundSchedule.setUserName(userName);
+            System.out.println(foundSchedule.getUserName());
+        }
+
+        if (todoTitle != null) {
+            foundSchedule.setTodoTitle(todoTitle);
+            System.out.println(foundSchedule.getTodoTitle());
+        }
+
+        if (todoContent != null) {
+            foundSchedule.setTodoContent(todoContent);
+            System.out.println(foundSchedule.getTodoContent());
+        }
+
+        scheduleRepository.save(foundSchedule);
+    }
+
+
+    public void deleteById(Long id) {
+        if (!scheduleRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않습니다. id = " + id);
+        }
+        scheduleRepository.deleteById(id);
     }
 }

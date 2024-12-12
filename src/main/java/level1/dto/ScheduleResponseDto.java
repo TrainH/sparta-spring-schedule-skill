@@ -2,7 +2,6 @@ package level1.dto;
 
 import level1.entity.Schedule;
 import lombok.Getter;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 

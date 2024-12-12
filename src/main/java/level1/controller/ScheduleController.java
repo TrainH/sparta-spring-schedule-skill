@@ -1,6 +1,7 @@
 package level1.controller;
 
 
+import level1.dto.PatchScheduleRequestDto;
 import level1.dto.PostScheduleRequestDto;
 import level1.dto.ScheduleResponseDto;
 import level1.service.ScheduleService;
@@ -36,8 +37,26 @@ public class ScheduleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScheduleResponseDto> getById(@PathVariable long id) {
+    public ResponseEntity<ScheduleResponseDto> getById(@PathVariable Long id) {
         ScheduleResponseDto scheduleResponseDto = scheduleService.getById(id);
         return ResponseEntity.ok(scheduleResponseDto);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> pathById(@PathVariable Long id,
+                                                        @RequestBody PatchScheduleRequestDto patchScheduleRequestDto) {
+        scheduleService.patchById(
+                                        id,
+                                        patchScheduleRequestDto.getUserName(),
+                                        patchScheduleRequestDto.getTodoTitle(),
+                                        patchScheduleRequestDto.getTodoContent()
+                                );
+        return ResponseEntity.ok(null);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable long id) {
+        scheduleService.deleteById(id);
+        return ResponseEntity.ok(null);
     }
 }
