@@ -15,5 +15,5 @@ import java.time.LocalDateTime;
 public abstract class MemberBaseEntity {
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime created;
+    private LocalDateTime createdAt;
 }

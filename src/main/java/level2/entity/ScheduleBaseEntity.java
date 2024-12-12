@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 public abstract class ScheduleBaseEntity {
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime created;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDateTime modified;
+    private LocalDateTime modifiedAt;
 }

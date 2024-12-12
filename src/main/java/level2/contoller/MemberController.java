@@ -5,10 +5,9 @@ import level2.dto.MemberSignUpResponseDto;
 import level2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -28,4 +27,24 @@ public class MemberController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @GetMapping
+    public ResponseEntity<List<MemberSignUpResponseDto>> getAll() {
+        List<MemberSignUpResponseDto> responseDto =
+                memberService.getAll();
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MemberSignUpResponseDto> getById(@PathVariable Long id) {
+        MemberSignUpResponseDto responseDto =
+                memberService.getById(id);
+        return ResponseEntity.ok(responseDto);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MemberSignUpResponseDto> deleteById(@PathVariable Long id) {
+                memberService.deleteById(id);
+        return ResponseEntity.ok(null);
+    }
 }

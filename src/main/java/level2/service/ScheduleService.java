@@ -26,8 +26,8 @@ public class ScheduleService {
                                        schedule.getUserName(),
                                        schedule.getTodoTitle(),
                                        schedule.getTodoContent(),
-                                       schedule.getCreated(),
-                                       schedule.getModified());
+                                       schedule.getCreatedAt(),
+                                       schedule.getModifiedAt());
 
     }
 
