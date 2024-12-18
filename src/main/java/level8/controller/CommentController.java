@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// 댓글 CRUD
 @Slf4j
 @RestController
 @RequestMapping("/comments")

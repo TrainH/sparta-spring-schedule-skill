@@ -2,6 +2,8 @@ package level8.config;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
+// 비밀번호 암호화
+
 @Component
 public class PasswordEncoder {
 

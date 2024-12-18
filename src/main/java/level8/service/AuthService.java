@@ -14,10 +14,11 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-    private final Map<String, String> sessionStorage = new HashMap<>();
 
+    private final Map<String, String> sessionStorage = new HashMap<>();
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+
 
     public String authenticate(String email, String password) {
 
@@ -37,13 +38,5 @@ public class AuthService {
             return sessionId;
         }
         return null;
-    }
-
-    public boolean validateSession(String sessionId) {
-        return sessionStorage.containsKey(sessionId);
-    }
-
-    public void invalidateSession(String sessionId) {
-        sessionStorage.remove(sessionId);
     }
 }

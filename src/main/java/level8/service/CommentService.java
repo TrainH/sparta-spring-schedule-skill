@@ -16,8 +16,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CommentService {
+
     private final ScheduleRepository scheduleRepository;
     private final CommentRepository commentRepository;
+
 
     public CommentResponseDto post(Long scheduleId, String comment){
         Schedule foundSchedule = scheduleRepository.findById(scheduleId)
@@ -31,6 +33,8 @@ public class CommentService {
         commentRepository.save(comment_);
         return CommentResponseDto.toDto(comment_);
     }
+
+
     public List<CommentResponseDto> getAll(){
         return commentRepository.findAll()
                                 .stream()
@@ -38,12 +42,14 @@ public class CommentService {
                                 .toList();
     }
 
+
     public CommentResponseDto getById(Long id){
         return commentRepository.findById(id)
                 .map(CommentResponseDto::toDto)
                 .orElseThrow(()->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않습니다. id = " + id));
     }
+
 
     public void patchById(Long id, String comment){
         Comment foundComment = commentRepository.findById(id)

@@ -5,7 +5,6 @@ import level8.dto.SchedulePageResponseDto;
 import level8.dto.SchedulePatchRequestDto;
 import level8.dto.SchedulePostRequestDto;
 import level8.dto.ScheduleResponseDto;
-import level8.entity.Schedule;
 import level8.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
-
 import java.util.List;
+
+// 일정 CRUD
 
 @Slf4j
 @RestController
@@ -23,7 +23,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScheduleController {
 
+
     private final ScheduleService scheduleService;
+
 
     @PostMapping
     public Object post(
@@ -44,12 +46,14 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleResponseDto);
     }
 
+
     @GetMapping
     public ResponseEntity<List<ScheduleResponseDto>> getAll() {
         List<ScheduleResponseDto> scheduleResponseDtoList =
                             scheduleService.getAll();
         return ResponseEntity.ok(scheduleResponseDtoList);
     }
+
 
     @GetMapping("/list")
     public ResponseEntity<Page<SchedulePageResponseDto>> getList(
@@ -60,11 +64,13 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleList);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> getById(@PathVariable Long id) {
         ScheduleResponseDto scheduleResponseDto = scheduleService.getById(id);
         return ResponseEntity.ok(scheduleResponseDto);
     }
+
 
     @PatchMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> pathById(
@@ -80,6 +86,7 @@ public class ScheduleController {
                                 );
         return ResponseEntity.ok(null);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable long id) {

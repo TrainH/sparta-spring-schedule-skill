@@ -3,8 +3,10 @@ package level8.service;
 
 import level8.dto.SchedulePageResponseDto;
 import level8.dto.ScheduleResponseDto;
+import level8.entity.Comment;
 import level8.entity.Member;
 import level8.entity.Schedule;
+import level8.repository.CommentRepository;
 import level8.repository.MemberRepository;
 import level8.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +23,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
+
     private final ScheduleRepository scheduleRepository;
     private final MemberRepository memberRepository;
+    private final CommentRepository commentRepository;
 
     public ScheduleResponseDto post(String userName, String todoTitle, String todoContent) {
 
@@ -46,12 +50,14 @@ public class ScheduleService {
 
     }
 
+
     public List<ScheduleResponseDto> getAll(){
         return scheduleRepository.findAll()
                                  .stream()
                                  .map(ScheduleResponseDto::toDto)
                                  .toList();
     }
+
 
     public Page<SchedulePageResponseDto> getPageList(int page){
         Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "modifiedAt"));
@@ -60,6 +66,7 @@ public class ScheduleService {
                                  .map(schedule ->
                                          SchedulePageResponseDto.toDto(schedule, schedule.getComments().size()));
     }
+
 
     public ScheduleResponseDto getById(Long id) {
         return scheduleRepository.findById(id)
@@ -90,9 +97,13 @@ public class ScheduleService {
 
 
     public void deleteById(Long id) {
-        if (!scheduleRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않습니다. id = " + id);
-        }
-        scheduleRepository.deleteById(id);
+        Schedule foundSchedule = scheduleRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않습니다. id = " + id));
+
+
+        List<Comment> comments = commentRepository.findBySchedule(foundSchedule);
+
+        commentRepository.deleteAll(comments);
+
     }
 }

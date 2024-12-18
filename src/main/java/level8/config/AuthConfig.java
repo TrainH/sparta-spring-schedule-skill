@@ -1,6 +1,5 @@
 package level8.config;
 
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -23,7 +22,8 @@ public class AuthConfig {
                                             FilterChain filterChain)
                     throws ServletException, IOException {
                 String path = request.getRequestURI();
-                System.out.println(path);
+
+                // 아래 URL만 접근 가능: 나머지는 세션이 있어야함
                 if (path.equals("/auth/login")
                     || path.equals("/auth/logout")
                     || path.equals("/members/signup")) {
@@ -33,8 +33,6 @@ public class AuthConfig {
                 Cookie[] cookies = request.getCookies();
                 if (cookies != null) {
                     for (Cookie cookie : cookies) {
-                        System.out.println("Cookie Name: " + cookie.getName());
-                        System.out.println("Cookie Value: " + cookie.getValue());
                         if ("SESSION".equals(cookie.getName()) &&
                                 isValidSession(cookie.getValue())) {
                             filterChain.doFilter(request, response);
