@@ -13,7 +13,7 @@
 > 
 > **작성자:** TrainH
 > 
-> **개발 기간:** 2024년 11월 29일 ~ 12월 11일  
+> **개발 기간:** 2024년 12월 11일 ~ 12월 18일  
 >
 > **개발 환경:**
 > - **IDE**: IntelliJ IDEA
@@ -22,7 +22,7 @@
 >
 
 # 1. ERD
-![image](https://github.com/user-attachments/assets/62bbfa8b-16a4-44e4-96b6-8f795baa5c15)
+![image](https://github.com/user-attachments/assets/94553027-f04e-45e7-96e7-7c11ec0c9e70)
 
 
 # 2. API 명세서
