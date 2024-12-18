@@ -21,26 +21,25 @@
 > - **DB**: My Sql Database
 >
 
-# ERD
+# 1. ERD
 ![image](https://github.com/user-attachments/assets/62bbfa8b-16a4-44e4-96b6-8f795baa5c15)
 
 
-# 포스트맨 API 상세 명세서
->
-> https://documenter.getpostman.com/view/30208126/2sAYJ1kh9o 
->
+# 2. API 명세서
+> **포스트맨 API 상세 명세서**
+> - https://documenter.getpostman.com/view/30208126/2sAYJ1kh9o 
+> 
 
 
-# API 명세서 요약 (spring-schedule-skill)
+### API 명세서 요약 (spring-schedule-skill)
 
-### 기본 URL
+#### 기본 URL
 
 `http://localhost:8080`
 
 ---
 
-
-### 1. 일정 관리 (Schedule)
+#### 1. 일정 관리 (Schedule)
 
 | 기능          | URL                 | Method | Request Body                                                                                      | Response                          |
 |---------------|---------------------|--------|--------------------------------------------------------------------------------------------------|-----------------------------------|
