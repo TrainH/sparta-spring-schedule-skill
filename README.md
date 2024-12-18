@@ -22,7 +22,8 @@
 >
 
 # ERD
-![image](https://github.com/user-attachments/assets/947776a6-518c-4aa6-8c58-8d93e1052246)
+![image](https://github.com/user-attachments/assets/62bbfa8b-16a4-44e4-96b6-8f795baa5c15)
+
 
 # 포스트맨 API 상세 명세서
 >
@@ -32,7 +33,7 @@
 
 # API 명세서 요약 (spring-schedule-skill)
 
-## 기본 URL
+### 기본 URL
 
 `http://localhost:8080`
 
