@@ -31,9 +31,8 @@
 > 
 
 
-### API 명세서 요약 (spring-schedule-skill)
 
-#### 기본 URL
+#### 0. 기본 URL
 
 `http://localhost:8080`
 
