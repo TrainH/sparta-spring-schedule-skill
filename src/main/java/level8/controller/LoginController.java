@@ -41,12 +41,12 @@ public class LoginController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletResponse response) {
+    public ResponseEntity<LoginResponseDto> logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("SESSION", null);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(0); // 로그아웃이면 쿠키는 바로 만료
         response.addCookie(cookie);
-        return ResponseEntity.noContent().header("message", "Logout successful").build();
+        return ResponseEntity.ok(new LoginResponseDto("Logout completed"));
     }
 }

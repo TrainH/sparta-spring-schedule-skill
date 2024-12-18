@@ -28,14 +28,9 @@ public class ScheduleController {
 
 
     @PostMapping
-    public Object post(
-            @Validated @RequestBody SchedulePostRequestDto postScheduleRequestDto,
-            BindingResult bindingResult) {
+    public ResponseEntity<ScheduleResponseDto> post(
+            @Validated @RequestBody SchedulePostRequestDto postScheduleRequestDto) {
 
-            if (bindingResult.hasErrors()) {
-                log.info("validation errors={}", bindingResult);
-                return bindingResult.getAllErrors();
-            }
 
         ScheduleResponseDto scheduleResponseDto =
                 scheduleService.post(

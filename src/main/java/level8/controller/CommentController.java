@@ -22,14 +22,9 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    public Object post(
-            @Validated @RequestBody CommentPostRequestDto postRequestDto,
-            BindingResult bindingResult
-            ) {
-        if (bindingResult.hasErrors()){
-            log.info("validation errors = {}", bindingResult);
-            return bindingResult.getAllErrors();
-        }
+    public ResponseEntity<CommentResponseDto> post(
+            @Validated @RequestBody CommentPostRequestDto postRequestDto) {
+
         CommentResponseDto commentResponseDto =
                                     commentService.post(
                                             postRequestDto.getSchedule_id(),

@@ -33,7 +33,6 @@ public class AuthService {
 
         String sessionId = UUID.randomUUID().toString();
         if (sessionId != null) {
-            System.out.println(sessionId);
             sessionStorage.put(email, sessionId);
             return sessionId;
         }

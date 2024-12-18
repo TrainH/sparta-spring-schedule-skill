@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,14 +25,9 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public Object post(
-            @Validated @RequestBody MemberPostRequestDto requestDto,
-            BindingResult bindingResult) {
+    public ResponseEntity<MemberResponseDto> post(
+            @Validated @RequestBody MemberPostRequestDto requestDto) {
 
-        if (bindingResult.hasErrors()) {
-            log.info("validation errors={}", bindingResult);
-            return bindingResult.getAllErrors();
-        }
 
         MemberResponseDto responseDto =
                 memberService.post(
@@ -78,4 +74,13 @@ public class MemberController {
                 memberService.deleteById(id);
         return ResponseEntity.ok(null);
     }
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<List<String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+//        List<String> errors = ex.getBindingResult().getFieldErrors().stream()
+//                .map(error -> error.getField() + ": " + error.getDefaultMessage())
+//                .toList();
+//        log.info("Validation errors: {}", errors);
+//        return ResponseEntity.badRequest().body(errors);
+//    }
 }
